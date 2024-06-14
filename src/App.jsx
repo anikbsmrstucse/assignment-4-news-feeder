@@ -1,15 +1,10 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Newsboard from "./components/Newsboard/Newsboard";
+import Page from "./Page";
+import NewsProvider from "./provider/NewsProvider";
 
 export default function App() {
-  return (
-    <>
-     <Header />
-     <main className="my-10 lg:my-14">
-        <Newsboard />
-     </main>
-     <Footer />
-    </>
-  )
+    return (
+        <NewsProvider>
+            <Page />
+        </NewsProvider>
+    );
 }
