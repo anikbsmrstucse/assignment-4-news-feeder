@@ -1,3 +1,5 @@
+import CategoryProvider from "./CategoryProvider";
 import NewsProvider from "./NewsProvider";
 
-export { NewsProvider };
+export { CategoryProvider, NewsProvider };
+

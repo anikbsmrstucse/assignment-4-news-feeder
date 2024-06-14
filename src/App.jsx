@@ -1,10 +1,13 @@
 import Page from "./Page";
+import { CategoryProvider } from "./provider";
 import NewsProvider from "./provider/NewsProvider";
 
 export default function App() {
     return (
-        <NewsProvider>
-            <Page />
-        </NewsProvider>
+        <CategoryProvider>
+            <NewsProvider>
+                <Page />
+            </NewsProvider>
+        </CategoryProvider>
     );
 }

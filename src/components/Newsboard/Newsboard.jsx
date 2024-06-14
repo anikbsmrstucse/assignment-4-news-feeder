@@ -10,11 +10,10 @@ export default function Newsboard() {
     const { news } = useContext(NewsContext);
     const leftSide = leftSideNews(news);
     const rightSide = rightSideNews(news);
-    console.log({ rightSide: rightSide });
     return (
         <div className="container mx-auto grid grid-cols-12 gap-8">
             {/* left side news */}
-            <div className="col-span-12 grid grid-cols-12 gap-6 self-start xl:col-span-8">
+            <div className={`col-span-12 grid grid-cols-12 gap-6 self-start xl:col-span-${rightSide?.length === 0 ? 12 : 8}`}>
                 {leftSide?.length > 0 &&
                     leftSide?.map((item) => {
                         return (

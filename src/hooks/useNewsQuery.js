@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CategoryContext } from "../contexts";
 
 const useNewsQuery = () => {
     const [news, setNews] = useState([]);
@@ -7,6 +8,9 @@ const useNewsQuery = () => {
         message: "",
     });
     const [error, setError] = useState(null);
+
+    const {selectedCategory} = useContext(CategoryContext);
+    console.log(selectedCategory);
 
     const fetchNews = async (category) => {
         try {
@@ -29,13 +33,12 @@ const useNewsQuery = () => {
 
     useEffect(() => {
         setLoading({ ...loading, state: true, message: "Starting fetching..."})
-        // if (category) {
-        //     fetchNews(category);
-        // } else {
-        //     fetchNews('/')
-        // }
-        fetchNews('/');
-    }, []);
+        if (selectedCategory) {
+            fetchNews(selectedCategory);
+        } else {
+            fetchNews('/')
+        }
+    }, [selectedCategory]);
 
     return { news, loading, error };
 };
