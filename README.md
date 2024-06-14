@@ -10,3 +10,5 @@
 - using context api composition pattern,
 
 [Screenshots](./src/assets/localhost_5173_.png)
+
+[Deploy_Link](https://assignment-4-news-feeder-delta.vercel.app/)
