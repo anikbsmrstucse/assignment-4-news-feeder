@@ -3,7 +3,7 @@ import { CategoryContext } from "../../contexts";
 import { categories } from "../../data/category-data";
 
 export default function Category() {
-    const {setSelectedCategory} = useContext(CategoryContext);
+    const {selectedCategory,setSelectedCategory} = useContext(CategoryContext);
     const data = categories();
     return (
         <div className="container mx-auto mt-6">
@@ -14,6 +14,11 @@ export default function Category() {
                             <a
                                 href="#"
                                 onClick={() => setSelectedCategory(`?category=${item.value}`)}
+                                className={`${
+                                    selectedCategory === `?category=${item.value}`
+                                        ? 'text-[#00d991]'  
+                                        : 'text-[#000]' 
+                                }`}
                             >
                                 {item.category}
                             </a>

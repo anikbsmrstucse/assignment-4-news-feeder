@@ -5,7 +5,7 @@ const CategoryProvider = ({ children }) => {
     const [selectedCategory, setSelectedCategory] = useState("");
 
     return (
-        <CategoryContext.Provider value={{ selectedCategory, setSelectedCategory }}>
+        <CategoryContext.Provider value={{ selectedCategory, setSelectedCategory}}>
             {children}
         </CategoryContext.Provider>
     );

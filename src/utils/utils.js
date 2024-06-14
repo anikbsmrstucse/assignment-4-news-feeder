@@ -12,7 +12,7 @@ const leftSideNews = (news) => {
     if (news.length > 0) {
         const filteredNews = news.filter(
             (singleNews) =>
-                singleNews.description !== null || singleNews.content !== null
+                singleNews.description !== null && singleNews.content !== null
         );
         return filteredNews;
     }
@@ -48,6 +48,21 @@ function getFormattedDate(value, type, inMS) {
     return new Intl.DateTimeFormat("en-US", options).format(date);
 }
 
+function getCurrentDate() {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+    const now = new Date();
+    const dayOfWeek = daysOfWeek[now.getDay()];
+    const month = months[now.getMonth()];
+    const dayOfMonth = now.getDate();
+    const year = now.getFullYear();
+    
+    return `${dayOfWeek}, ${month} ${dayOfMonth}, ${year}`;
+}
 
-export { getFormattedDate, getRandomNumber, leftSideNews, rightSideNews };
+
+
+export { getCurrentDate, getFormattedDate, getRandomNumber, leftSideNews, rightSideNews };
 

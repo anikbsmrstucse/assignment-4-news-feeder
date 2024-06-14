@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { CategoryContext } from "../contexts";
+import { CategoryContext, SearchContext } from "../contexts";
 
 const useNewsQuery = () => {
     const [news, setNews] = useState([]);
@@ -10,7 +10,8 @@ const useNewsQuery = () => {
     const [error, setError] = useState(null);
 
     const {selectedCategory} = useContext(CategoryContext);
-    console.log(selectedCategory);
+    const {searchTerm} = useContext(SearchContext);
+    console.log(searchTerm);
 
     const fetchNews = async (category) => {
         try {
@@ -29,7 +30,26 @@ const useNewsQuery = () => {
         } finally {
             setLoading({ ...loading, state: false, message: "" });
         }
-    };    
+    };
+    
+    const searchNews = async (searchText) => {
+        try {
+            setLoading({ ...loading, state: true, message: "Searching news..." });
+            const response = await fetch(
+                `http://localhost:8000/v2/search?q=${searchText}`
+            );
+            if (!response.ok) {
+                const errorMessage = "Fetching news failed" + response.message;
+                throw new Error(errorMessage);
+            }
+            const data = await response.json();
+            setNews(data.result);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading({ ...loading, state: false, message: "" });
+        }
+    }
 
     useEffect(() => {
         setLoading({ ...loading, state: true, message: "Starting fetching..."})
@@ -39,6 +59,14 @@ const useNewsQuery = () => {
             fetchNews('/')
         }
     }, [selectedCategory]);
+
+    useEffect(() => {
+        if(searchTerm){
+            searchNews(searchTerm);
+        }else {
+            fetchNews('/');
+        }
+    },[searchTerm])
 
     return { news, loading, error };
 };

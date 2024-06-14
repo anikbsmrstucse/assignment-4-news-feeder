@@ -1,4 +1,7 @@
+import { getCurrentDate } from "../../utils/utils";
+
 export default function Date() {
+    const date = getCurrentDate();
     return (
         <div className="flex items-center space-x-4">
             <svg
@@ -51,7 +54,7 @@ export default function Date() {
                     strokeLinejoin="round"
                 />
             </svg>
-            <span>Thursday, February 25, 2021</span>
+            <span>{date}</span>
         </div>
     );
 }
